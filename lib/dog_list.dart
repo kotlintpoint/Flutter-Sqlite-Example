@@ -12,11 +12,12 @@ class DogList extends StatefulWidget {
 
 class _DogListState extends State<DogList> {
   late Future<List<Dog>> dogs;
+  final DatabaseService _databaseService = DatabaseService();
 
   @override
   void initState() {
     super.initState();
-    dogs = retrieveDogs();
+    dogs = _databaseService.retrieveDogs();
   }
 
   @override
@@ -53,7 +54,7 @@ class _DogListState extends State<DogList> {
                             if (value == true) {
                               // Refresh the list
                               setState(() {
-                                dogs = retrieveDogs();  
+                                dogs = _databaseService.retrieveDogs();  
                               });                            
                             }
                           });
@@ -63,8 +64,8 @@ class _DogListState extends State<DogList> {
                         icon: Icon(Icons.delete),
                         onPressed: () {
                           setState(() {
-                            deleteDog(dog.id);
-                            dogs = retrieveDogs();
+                            _databaseService.deleteDog(dog.id);
+                            dogs = _databaseService.retrieveDogs();
                           });
                         },
                       ),
@@ -84,7 +85,7 @@ class _DogListState extends State<DogList> {
           ).then((value) {
             if (value == true) {
               setState(() {
-               dogs = retrieveDogs(); 
+               dogs = _databaseService.retrieveDogs(); 
               });
             }
           });

@@ -15,6 +15,8 @@ class _DogFormState extends State<DogForm> {
   final _formKey = GlobalKey<FormState>();
   late String _name;
   late int _age;
+  final DatabaseService _databaseService = DatabaseService();
+
 
   @override
   void initState() {
@@ -72,10 +74,10 @@ class _DogFormState extends State<DogForm> {
                     _formKey.currentState!.save();
                     if (widget.dog == null) {
                       // Add new dog
-                      await insertDog(Dog(name: _name, age: _age));
+                      await _databaseService.insertDog(Dog(name: _name, age: _age));
                     } else {
                       // Update existing dog
-                      await updateDog(Dog(id: widget.dog!.id, name: _name, age: _age));
+                      await _databaseService.updateDog(Dog(id: widget.dog!.id, name: _name, age: _age));
                     }
                     if (context.mounted) Navigator.pop(context, true);
                   }
