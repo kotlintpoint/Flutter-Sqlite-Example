@@ -1,4 +1,5 @@
-# flutter_sqlite_demo
+# Flutter Sqlite Example 
+# Flutter Offline Database Sqlite
 
 A new Flutter project.
 
